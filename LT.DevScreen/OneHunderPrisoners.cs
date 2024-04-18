@@ -6,19 +6,18 @@ namespace LT.DevScreen;
 internal static class OneHundredPrisoners
 {
     /// <summary>
-    /// A cabinet containing 100 drawers.
-    /// <see cref="Cabinet.Drawers"/> is an integer array representing the drawers in the problem.
-    /// The index of an element in <see cref="Cabinet.Drawers"/> represents the number of the drawer.
-    /// The value of an element in <see cref="Cabinet.Drawers"/> represents the number inside the drawer.
+    /// An integer array representing the drawers in the problem.
+    /// The index of an element represents the number of the drawer.
+    /// The value of an element represents the number inside the drawer.
     /// </summary>
-    private static Cabinet _cabinet = Cabinet.Instance;
+    static int[] Drawers = GetShuffledArray();
 
     /// <summary>
     /// An integer array representing the prisoners in the problem.
     /// The index of an element represents the prisoner's position in the sequence of prisoners.
     /// The value of an element represents the prisoner's number.
     /// </summary>
-    private static int[] Prisoners = Enumerable.Range(1, 100).ToArray();
+    static int[] Prisoners = Enumerable.Range(1, 100).ToArray();
 
     /// <summary>
     /// Simulates a trial run of the 100 prisoners problem.
@@ -51,7 +50,7 @@ internal static class OneHundredPrisoners
             while (prisonerAttempts < 50)
             {
                 // prisoner opens drawer to get the number in the drawer
-                drawerNumber = _cabinet.Drawers[drawerIndex - 1];
+                drawerNumber = Drawers[drawerIndex - 1];
 
                 // since the prisoner has opened the drawer and seen the number inside, this constitutes an attempt having been made to find their number
                 prisonerAttempts++;
@@ -88,31 +87,6 @@ internal static class OneHundredPrisoners
         // if we made it here return true, which means that all prisoners found their number in a drawer and will be freed
         return true;
     }
-}
-
-/// <summary>
-/// Singleton, representing a cabinet full of drawers.
-/// Using a singleton to ensure that the 100 drawers each hold their same number every time RunSimulation is executed during the lifecycle of the application.
-/// Not sure if the drawers keeping their same number is required for the test, though.
-/// </summary>
-internal sealed class Cabinet
-{
-    private Cabinet() { }
-    private static readonly Lazy<Cabinet> lazy = new Lazy<Cabinet>(() => new Cabinet());
-    public static Cabinet Instance
-    {
-        get 
-        { 
-            return lazy.Value; 
-        }
-    }
-
-    /// <summary>
-    /// An integer array representing the drawers in the problem.
-    /// The index of an element represents the number of the drawer.
-    /// The value of an element represents the number inside the drawer.
-    /// </summary>
-    public int[] Drawers = GetShuffledArray();
 
     /// <summary>
     /// Generates a random sequence of integers from 1 to 100

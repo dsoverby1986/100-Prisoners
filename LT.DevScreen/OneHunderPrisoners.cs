@@ -6,13 +6,6 @@ namespace LT.DevScreen;
 internal static class OneHundredPrisoners
 {
     /// <summary>
-    /// An integer array representing the drawers in the problem.
-    /// The index of an element represents the number of the drawer.
-    /// The value of an element represents the number inside the drawer.
-    /// </summary>
-    static int[] Drawers = GetShuffledArray();
-
-    /// <summary>
     /// An integer array representing the prisoners in the problem.
     /// The index of an element represents the prisoner's position in the sequence of prisoners.
     /// The value of an element represents the prisoner's number.
@@ -31,6 +24,11 @@ internal static class OneHundredPrisoners
     /// </returns>
     public static bool RunSimulation()
     {
+        // An integer array representing the drawers in the problem.
+        // The index of an element represents the number of the drawer.
+        // The value of an element represents the number inside the drawer.
+        int[] Drawers = GetShuffledArray();
+
         int prisonerAttempts, prisonerNumber, drawerIndex, drawerNumber;
         bool doFreePrisoner = false;
 
